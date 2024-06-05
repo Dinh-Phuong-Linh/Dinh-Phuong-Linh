@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculator App</title>
+<link rel="stylesheet" href="styless.css">
+</head>
+<body>
+<div class="calculator">
+    <input id="inputA" type="text" placeholder="Enter number A">
+    <input id="inputB" type="text" placeholder="Enter number B">
+    <button onclick="performCalculation('add')">SUM</button>
+    <button onclick="performCalculation('subtract')">SUBTRACT</button>
+    <button onclick="performCalculation('multiply')">MULTIPLY</button>
+    <button onclick="performCalculation('divide')">DIVIDE</button>
+    <button onclick="resetInputs()">RESET</button>
+    <div id="result"></div>
+</div>
+<script src="mainn.js"></script>
+</body>
+</html>
+
+ 
+function performCalculation(operation) {
+    const inputA = document.getElementById('inputA').value;
+    const inputB = document.getElementById('inputB').value;
+
+    if (!inputA || !inputB || isNaN(inputA) || isNaN(inputB)) {
+        alert('Please enter valid numbers in both inputs.');
+        return;
+    }
+
+    let result;
+    switch(operation) {
+        case 'add':
+            result = Number(inputA) + Number(inputB);
+            break;
+        case 'subtract':
+            result = Number(inputA) - Number(inputB);
+            break;
+        case 'multiply':
+            result = Number(inputA) * Number(inputB);
+            break;
+        case 'divide':
+            if (inputB == 0) {
+                alert('Cannot divide by zero.');
+                return;
+            }
+            result = Number(inputA) / Number(inputB);
+            break;
+    }
+
+    document.getElementById('result').innerText = `Result: ${result}`;
+}
+
+function resetInputs() {
+    document.getElementById('inputA').value = '';
+    document.getElementById('inputB').value = '';
+    document.getElementById('result').innerText = '';
+}
+
+ 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.calculator {
+    padding: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input[type="text"] {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    width: calc(100% - 24px);
+}
+
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #e9e9e9;
+    width: calc(100% - 22px);
+}
